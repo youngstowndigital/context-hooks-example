@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import { useContext } from 'react/cjs/react.development';
+import React, { useState, useContext } from 'react';
 import { ArticleContext } from '../../context/articleContext';
 
 const AddArticle = () => {
-    const { saveArticle } = useContext(ArticleContext);
+    const { dispatch } = useContext(ArticleContext);
     const [article, setArticle] = useState();
 
     const handleArticleData = e => {
@@ -12,7 +11,7 @@ const AddArticle = () => {
 
     const addNewArticle = e => {
         e.preventDefault();
-        saveArticle(article);
+        dispatch({ type: "ADD_ARTICLE", article });
     }
 
     return (
@@ -20,7 +19,7 @@ const AddArticle = () => {
             <input
                 type="text"
                 id="title"
-                placeHolder="Title"
+                placeholder="Title"
                 onChange={handleArticleData}
             />
             <input
